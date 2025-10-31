@@ -18,11 +18,11 @@ return {
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-      local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({
+      vim.lsp.config('lspconfig', {
         capabilities = capabilities
       })
-      lspconfig.rust_analyzer.setup({
+      vim.lsp.config('rust_analyzer', {
+        -- Server-specific settings. See `:help lsp-quickstart`
         settings = {
           ["rust-analyzer"] = {
             checkOnSave = { command = "clippy" },
