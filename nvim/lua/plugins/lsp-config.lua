@@ -35,5 +35,11 @@ return {
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
       vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
     end,
+    opts = {
+      servers = {
+        -- copilot.lua only works with its own native server
+        copilot = {enabled = false},
+      }
+    },
   },
 }
