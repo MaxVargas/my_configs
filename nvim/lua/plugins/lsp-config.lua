@@ -1,45 +1,44 @@
 return {
   {
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup()
-    end,
+    "mason-org/mason.nvim",
+    opts = {},
   },
   {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "rust_analyzer" },
-      })
-    end,
+    "mason-org/mason-lspconfig.nvim",
+    opts = {
+      automatic_enable = {
+        exclude = { "rust_analyzer" }; -- NixOS issue... no FHS dynamically linked executable
+      },
+      ensure_installed = { 
+        "lua_ls", 
+        "pyright",
+        "pyright",
+        "ts_ls",
+        "clangd",
+      },
+    },
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
+    },
   },
   {
     "neovim/nvim-lspconfig",
     config = function()
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-      vim.lsp.config('lspconfig', {
-        capabilities = capabilities
-      })
-      vim.lsp.config('rust_analyzer', {
-        -- Server-specific settings. See `:help lsp-quickstart`
-        settings = {
-          ["rust-analyzer"] = {
-            checkOnSave = { command = "clippy" },
-          }
-        },
-        capabilities = capabilities,
-      })
-
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
-    end,
-    opts = {
-      servers = {
-        -- copilot.lua only works with its own native server
-        copilot = {enabled = false},
+      local lsps = {
+        { "lua_ls" },
+        { "pyright" },
+        { "ts_ls" },
+        { "rust-analyzer" },
       }
-    },
+
+      for _, lsp in pairs(lsps) do
+        local name, config = lsp[1], lsp[2]
+        vim.lsp.enable(name)
+        if config then
+          vim.lsp.config(name, config)
+        end
+      end
+    end
   },
 }
