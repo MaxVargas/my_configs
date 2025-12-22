@@ -29,7 +29,7 @@ return {
         { "lua_ls" },
         { "pyright" },
         { "ts_ls" },
-        { "rust-analyzer" },
+        { "rust_analyzer" },
       }
 
       for _, lsp in pairs(lsps) do
