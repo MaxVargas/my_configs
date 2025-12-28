@@ -5,12 +5,13 @@ return {
   },
   {
     "mason-org/mason-lspconfig.nvim",
+    branch = "main",
     opts = {
       automatic_enable = {
         exclude = { "rust_analyzer" }; -- NixOS issue... no FHS dynamically linked executable
       },
-      ensure_installed = { 
-        "lua_ls", 
+      ensure_installed = {
+        "lua_ls",
         "pyright",
         "pyright",
         "ts_ls",

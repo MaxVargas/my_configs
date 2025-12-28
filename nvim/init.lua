@@ -1,3 +1,5 @@
 -- bootstrap lazy.nvim
-require("vim-options")
 require("config.lazy")
+require("config.keymaps")
+require("config.autocmds")
+require("config.options")
