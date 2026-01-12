@@ -1,7 +1,7 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Think about looking here for some options: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 
-vim.cmd("colorscheme bamboo")
+vim.cmd("colorscheme melange")
 
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
